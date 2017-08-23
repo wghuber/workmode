@@ -1,0 +1,10 @@
+dev:
+  build: .
+  environment:
+    - DISPLAY
+    - USER=office
+  volumes:
+    - /tmp/.X11-unix/:/tmp/.X11-unix
+    - $HOME/.Xauthority:/$USER/.Xauthority
+  stdin_open: true
+  tty: true
