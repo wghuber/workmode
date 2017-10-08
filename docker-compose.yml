@@ -2,9 +2,12 @@ dev:
   build: .
   environment:
     - DISPLAY
-    - USER=office
   volumes:
     - /tmp/.X11-unix/:/tmp/.X11-unix
-    - $HOME/.Xauthority:/$USER/.Xauthority
+    - ~/.Xauthority:/root/.Xauthority
+    - ~/wd:/root/wd/
+    - ~/.ssh:/root/.ssh/:ro
+  network_mode: "bridge"
+  dns: 8.8.8.8
   stdin_open: true
   tty: true
