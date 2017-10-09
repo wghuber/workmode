@@ -84,6 +84,4 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias update-apt="sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && sudo apt-get autoremove --purge"
-
 _byobu_sourced=1 . /usr/bin/byobu-launch 2>/dev/null || true

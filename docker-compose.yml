@@ -5,9 +5,11 @@ dev:
   volumes:
     - /tmp/.X11-unix/:/tmp/.X11-unix
     - ~/.Xauthority:/root/.Xauthority
-    - ~/wd:/root/wd/
-    - ~/.ssh:/root/.ssh/:ro
-  network_mode: "bridge"
+    - ~/wd:/root/wd
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ~/.ssh:/root/.ssh:ro
+  net: host
   dns: 8.8.8.8
+  privileged: true
   stdin_open: true
   tty: true
