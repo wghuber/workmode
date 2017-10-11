@@ -26,10 +26,10 @@ RUN \
                   docker docker.io docker-compose && \
   eatmydata pip install --upgrade pip && \
   eatmydata pip install jupyter numpy scipy matplotlib pandas tensorflow tensorboard vispy pytest \
-              scikit-learn pytest-cov pylint ansible docker-py scrapy requests PyQt4 PyQt5 Pillow werkzeug PyYAML Sphinx seaborn bokeh plotly theano keras networkx pybrain sympy && \
+              scikit-learn pytest-cov pylint ansible docker-py scrapy requests Pillow werkzeug PyYAML Sphinx seaborn bokeh plotly theano keras networkx pybrain sympy && \
   eatmydata pip3 install --upgrade pip && \
   eatmydata pip3 install jupyter numpy scipy matplotlib pandas tensorflow tensorboard vispy pytest \
-              scikit-learn pytest-cov pylint ansible docker-py scrapy requests PyQt4 PyQt5 Pillow werkzeug PyYAML Sphinx seaborn bokeh plotly theano keras networkx pybrain sympy
+              scikit-learn pytest-cov pylint ansible docker-py scrapy requests PyQt5 Pillow werkzeug PyYAML Sphinx seaborn bokeh plotly theano keras networkx pybrain sympy
 
 # Update fonts
 ADD assets/SourceCodePro-Medium.ttf /usr/local/share/fonts/SourceCodePro-Medium.ttf
