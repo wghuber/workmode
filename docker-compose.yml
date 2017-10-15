@@ -1,15 +1,22 @@
-dev:
-  build: .
-  environment:
-    - DISPLAY
-  volumes:
-    - /tmp/.X11-unix/:/tmp/.X11-unix
-    - ~/.Xauthority:/root/.Xauthority
-    - ~/wd:/root/wd
-    - /var/run/docker.sock:/var/run/docker.sock
-    - ~/.ssh:/root/.ssh:ro
-  net: host
-  dns: 8.8.8.8
-  privileged: true
-  stdin_open: true
-  tty: true
+version: "2"
+services:
+  dev:
+    build:
+      context: .
+      args:
+        USER: dev
+        PASS: t1e2s3t4
+        UID: 1000
+    environment:
+      DISPLAY:
+    volumes:
+      - /tmp/.X11-unix/:/tmp/.X11-unix
+      - ~/.Xauthority:/home/dev/.Xauthority
+      - ~/wd:/home/dev/wd
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.ssh:/home/dev/.ssh:ro
+    network_mode: "host"
+    dns: 8.8.8.8
+    privileged: true
+    stdin_open: true
+    tty: true
