@@ -27,11 +27,15 @@ RUN eatmydata apt-get install -y \
 RUN eatmydata pip install --upgrade pip
 RUN eatmydata pip install jupyter numpy scipy matplotlib pandas tensorflow tensorboard vispy pytest \
               scikit-learn pytest-cov pylint ansible docker-py scrapy requests Pillow werkzeug PyYAML \
-              Sphinx seaborn bokeh plotly theano keras networkx pybrain sympy
+              Sphinx seaborn bokeh plotly theano keras networkx pybrain sympy \
+              jupyter-git jupyter-tensorboard jupyter-sphinx-theme jupyter_sphinx jupyter_contrib_nbextensions jupyter-alabaster-theme \
+              jupyter_nbextensions_configurator jupyter-beautifier jupyter_dashboards jupyter-tree-filter jupyter-tools
 RUN eatmydata pip3 install --upgrade pip
 RUN eatmydata pip3 install jupyter numpy scipy matplotlib pandas tensorflow tensorboard vispy pytest \
               scikit-learn pytest-cov pylint ansible docker-py scrapy requests PyQt5 Pillow werkzeug \
-              PyYAML Sphinx seaborn bokeh plotly theano keras networkx pybrain sympy
+              PyYAML Sphinx seaborn bokeh plotly theano keras networkx pybrain sympy \
+              jupyter-git jupyter-tensorboard jupyter-sphinx-theme jupyter_sphinx jupyter_contrib_nbextensions jupyter-alabaster-theme \
+              jupyter_nbextensions_configurator jupyter-beautifier jupyter_dashboards jupyter-tree-filter jupyter-tools
 
 # Update fonts
 ADD assets/SourceCodePro-Medium.ttf /usr/local/share/fonts/SourceCodePro-Medium.ttf
@@ -50,20 +54,24 @@ ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
-# Use given user.
+# Create user.
 ARG USER
 ARG PASS
 ARG UID
 RUN useradd -s /bin/zsh -m -u $UID -G sudo,docker $USER
 RUN echo "$USER:$PASS" | chpasswd
-USER $USER:$USER
+
+# Define working directory add files and set default shell.
+ENV HOME /home/$USER/
+ENTRYPOINT ["/bin/zsh"]
+WORKDIR $HOME
+ADD home/* $HOME
 
 # Install oh-my-zsh and spacemacs.
 RUN eatmydata git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
 RUN eatmydata git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d
 #RUN eatmydata git clone https://github.com/syl20bnr/spacemacs-elpa-mirror.git $HOME/elpamirror
 
-# Define working directory add files and set default shell.
-WORKDIR /home/$USER/
-ADD home/* ./
-ENTRYPOINT ["/bin/zsh"]
+RUN chown -R $USER:$USER $HOME
+
+USER $USER:$USER
